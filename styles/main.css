@@ -1,0 +1,75 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Times New Roman', Times, serif;
+}
+
+
+body, html {
+height: 100%;
+}
+
+
+.container {
+display: flex;
+height: 100vh;
+}
+
+
+.panel {
+display: flex;
+justify-content: center;
+align-items: center;
+text-decoration: none;
+color: rgb(11, 4, 4);
+font-size: 3rem;
+font-weight: bold;
+transition: 0.3s;
+text-shadow: -1px -1px 0 #ffffff,
+            1px -1px 0 #ffffff,
+            -1px 1px 0 #ffffff,
+            1px 1px 0 #ffffff;
+}
+
+
+.panel:hover {
+filter: brightness(1.2);
+}
+
+
+.professional {
+width: 50%;
+background: url("../media/professional.jpg") center/cover no-repeat;
+display: flex;
+align-items: flex-end;
+justify-content: flex-end;
+padding: 50px;
+}
+
+
+.right-column {
+width: 50%;
+display: flex;
+flex-direction: column;
+}
+
+
+.gaming {
+height: 50%;
+background: url("../media/gaming.png") center/cover no-repeat;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+padding: 50px;
+}
+
+
+.hobbies {
+height: 50%;
+background: url("../media/hobbies.jpg") center/cover no-repeat;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+padding: 20px;
+}
