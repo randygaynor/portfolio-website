@@ -67,7 +67,7 @@ padding: 50px;
 
 .hobbies {
 height: 50%;
-background: url("../media/hobbies.jpg") center/cover no-repeat;
+background: url("../media/hobbies.JPG") center/cover no-repeat;
 display: flex;
 align-items: flex-start;
 justify-content: center;
