@@ -179,3 +179,27 @@
     font-weight: 500;
     text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
+
+#introBlurb {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+    padding: 12px 16px;
+    border-radius: 8px;
+    /*font-family: sans-serif;*/
+    font-size: 14px;
+    max-width: 300px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 9999; /* make sure it's above Cesium */
+}
+
+.contact-link {
+    color: #34b57d; /* Change this to whatever color you like */
+    text-decoration: underline; /* optional, adds underline to indicate it's clickable */
+}
+
+.intro-note {
+    margin-top: 0.5em; /* add spacing above the line */
+    font-weight: bold; /* optional, makes it stand out */
+}

@@ -30,8 +30,19 @@
         new Cesium.OpenStreetMapImageryProvider({ url: "https://a.tile.openstreetmap.org/" })
     );
 
+    // --- Dynamic Date Calculation ---
+    // We use yesterday's date because 'today' is often incomplete 
+    // until the satellite finishes its daily global pass.
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    
+    // Format date to YYYY-MM-DD (ISO string splits at T to get the date part)
+    const satelliteDate = yesterday.toISOString().split('T')[0];
+    const satDateDiv = document.getElementById("satDate");
+    satDateDiv.textContent = "Imagery Date: " + satelliteDate;
+
     // --- Satellite imagery overlay ---
-    const satelliteDate = "2024-09-25";
     const satelliteLayer = viewer.imageryLayers.addImageryProvider(
         new Cesium.WebMapTileServiceImageryProvider({
             url: `https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${satelliteDate}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpg`,
@@ -70,20 +81,20 @@
         },
         {
             name: "Hurricane Analyst Internship",
-            lat: 22.32,
-            lon: -87.05,
+            lat: 19,
+            lon: -84,
             desc: `
                 <ul>
-                    <li>Pictured is Hurricane Helene on September 25, 2024</li>
-                    <li>With Moody's HWind, I produced operational wind field analyses of this storm</li>
-                    <li>Learned Data Collection, Software Operation, and Client Interaction</li>
-                    <li>Worked with GitHub, Database Interaction, Python, and Research</li>
+                    <li>With Moody's HWind, I produced operational wind field analyses of Hurricane Helene (left)</li>
+                    <li>As well as many other storms during the 2024 and 2025 Hurricane seasons</li>
+                    <li>Learned Data Collection, Software Operation, and Client Interaction while working operationally</li>
+                    <li>Worked with GitHub, Database Interaction, Python, and Research whil not on operational shifts</li>
                 </ul>
             `,
             link: "https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/hwind.html",
             linkText: "Moody's HWind",
-            mediaPath: "", // no media
-            mediaCaption: "",
+            mediaPath: "../media/Helene2024_geocolor.gif",
+            mediaCaption: "Satellite Loop of Hurricane Helene from before its landfall to after causing severe flooding in the southern Appalachians",
             billboard: { image: "https://raw.githubusercontent.com/randygaynor/portfolio-website/main/media/nGQAAAABklEQVQDAAVEjailRpAAAAAElFTkSuQmCC.png", scale: 0.07 }
         },
         {
@@ -170,6 +181,17 @@
 
     // --- Click handler ---
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    // --- Change cursor on hover ---
+    const hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    hoverHandler.setInputAction(movement => {
+    const pickedObject = viewer.scene.pick(movement.endPosition);
+    if (Cesium.defined(pickedObject) && pickedObject.id) {
+        viewer.canvas.style.cursor = "pointer"; // hand cursor
+    } else {
+        viewer.canvas.style.cursor = "default"; // normal arrow
+    }
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
     handler.setInputAction(click => {
         const pickedObject = viewer.scene.pick(click.position);
 
