@@ -3,11 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaming</title>
-<link rel="stylesheet" href="../styles/main.css">
+<title>Gaming Panel</title>
+<style>
+  /* Fullscreen video with slight bottom crop */
+  #mainClip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 104%; /* stretch to crop bottom */
+    object-fit: cover;
+    object-position: top; /* keep top visible */
+    z-index: -1;
+  }
+
+  /* Overlay stats */
+  .overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0);
+    padding: 15px;
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 26px;
+    transition: all 0.5s ease;
+  }
+</style>
 </head>
 <body>
-<h1 style="padding: 20px;">Gaming Page</h1>
-<p style="padding: 20px;">Content coming soon...</p>
+
+<video id="mainClip" autoplay muted playsinline preload="auto"></video>
+
+<div id="overlayStats" class="overlay">
+    Loading stats...
+</div>
+
+<script>
+const video = document.getElementById('mainClip');
+const overlay = document.getElementById('overlayStats');
+
+// Array of videos with optional overlay text
+const videoQueue = [
+    {
+        src: '../media/bedwars.mp4',
+        overlays: [
+            { time: 0, html: '<h2>Hypixel Bedwars Enjoyer Circa 2019-2024</h2>' },
+            { time: 10, html: '<h2>Final Level: 2057</p>' }
+        ]
+    },
+    {
+        src: '../media/bedwars2.mp4',
+        overlays: [
+            { time: 0, html: '<h2>Mining Diamonds!</h2>' },
+            { time: 5, html: '<h2>Crafting Weapons!</h2>' }
+        ]
+    },
+    {
+        src: '../media/geoguessr_clip.mp4',
+        overlays: [
+            { time: 0, html: '<h2>Geoguessr Adventures!</h2>' }
+        ]
+    }
+];
+
+let currentVideoIndex = 0;
+
+// Load and play a video from the queue
+function loadVideo(index) {
+    const clip = videoQueue[index];
+    video.src = clip.src;
+    overlay.innerHTML = clip.overlays[0]?.html || '';
+    video.play().catch(err => console.log('Video play failed:', err));
+}
+
+// Handle overlay updates based on timestamps
+video.addEventListener('timeupdate', () => {
+    const clip = videoQueue[currentVideoIndex];
+    const t = video.currentTime;
+
+    // Find the latest overlay that should be shown at this time
+    for (let i = clip.overlays.length - 1; i >= 0; i--) {
+        if (t >= clip.overlays[i].time) {
+            overlay.innerHTML = clip.overlays[i].html;
+            break;
+        }
+    }
+});
+
+// Move to next video when one ends
+video.addEventListener('ended', () => {
+    currentVideoIndex++;
+    if (currentVideoIndex < videoQueue.length) {
+        loadVideo(currentVideoIndex);
+    } else {
+        overlay.innerHTML = '<h2>All clips finished!</h2>';
+    }
+});
+
+// Start the first video
+loadVideo(currentVideoIndex);
+</script>
+
 </body>
 </html>
