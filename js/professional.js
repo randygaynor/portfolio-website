@@ -1,6 +1,6 @@
 // professional.js
 (function () {
-    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0ZmFjOGQ0Ni1hYjI0LTRiNzItOGVlMS0yMmZjNzY3MmQ1ZjQiLCJpZCI6MzY3MDk2LCJpYXQiOjE3NjQ5NzMzOTF9.cwlhh1VjxuWv6YPd6hsNGF_jsTLTXJ8gwM_ej2VsqQ4";
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMzg1OWIwZS0yZWZiLTQ5YWQtYjdiYS05ZDNjMTY4NGM2NTQiLCJpZCI6MzY3MDk2LCJpYXQiOjE3NjU2NzIyMTN9.CCDKoU0tE7KVW79TrJz0aXnoHlx0L4xXydL3N5OYrM0";
 
     const defaultView = {
         destination: Cesium.Cartesian3.fromDegrees(-120, 20, 18000000),
@@ -87,8 +87,8 @@
                 <ul>
                     <li>With Moody's HWind, I produced operational wind field analyses of Hurricane Helene (left)</li>
                     <li>As well as many other storms during the 2024 and 2025 Hurricane seasons</li>
-                    <li>Learned Data Collection, Software Operation, and Client Interaction while working operationally</li>
-                    <li>Worked with GitHub, Database Interaction, Python, and Research whil not on operational shifts</li>
+                    <li>Also learned Data Collection, Software Operation, and Client Interaction while working operationally</li>
+                    <li>And worked with GitHub, Database Interaction, Python, and Research while not on operational shifts</li>
                 </ul>
             `,
             link: "https://www.moodys.com/web/en/us/capabilities/catastrophe-modeling/hwind.html",
